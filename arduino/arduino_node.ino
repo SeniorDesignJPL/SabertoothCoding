@@ -11,13 +11,18 @@
 
 SoftwareSerial SWSerial(NOT_A_PIN, 18); // RX on no pin (unused), TX on pin 11 (to S1).
 USBSabertoothSerial C(SWSerial); // Use SWSerial as the serial port.
-USBSabertooth ST1[6] = {USBSabertooth(C, 128), USBSabertooth(C, 129), USBSabertooth(C, 130), USBSabertooth(C, 131), USBSabertooth(C, 132), USBSabertooth(C, 133)};
+USBSabertooth ST[3] = {USBSabertooth(C, 128), USBSabertooth(C, 129), USBSabertooth(C, 130)};
 
 ros::NodeHandle nh;
 
 void messageCb (const motor_controller::Motor& msg) {
-	nh.loginfo(("Addr: " + String(msg.address) + ", Speed: " + String(msg.speed)).c_str());
-	ST1[msg.address].motor(1, msg.speed);
+	nh.loginfo(
+		("Controller: " + String(msg.address / 2) +
+		", Motor: " + String((msg.address % 2) + 1) +
+		", Speed: " + String(msg.speed)).c_str()
+	);
+
+	ST[msg.address / 2].motor((msg.address % 2) + 1, msg.speed);
 }
 
 ros::Subscriber<motor_controller::Motor> sub("arduino/motors", &messageCb);
