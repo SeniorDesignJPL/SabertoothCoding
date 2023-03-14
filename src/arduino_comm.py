@@ -4,7 +4,7 @@ from geometry_msgs.msg import Twist
 from motor_controller.msg import Motor
 
 motor_addresses = [0, 1, 2, 3, 4, 5]
-motor_speeds = [2000] * 6
+motor_speeds = [500] * 6
 
 def callback(_: Twist, publisher: rospy.Publisher):
 	motor = Motor()
