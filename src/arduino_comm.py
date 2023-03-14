@@ -4,15 +4,13 @@ from geometry_msgs.msg import Twist
 from motor_controller.msg import Motor
 
 motor_addresses = [0, 1, 2, 3, 4, 5]
-motor_speeds = [500] * 6
+motor_speeds = [0] * 6
 
-def callback(_: Twist, publisher: rospy.Publisher):
-	motor = Motor()
-
+def callback(msg: Twist, publisher: rospy.Publisher):
 	motor = Motor()
 	for i, addr in enumerate(motor_addresses):
 		motor.address = addr
-		motor.speed = motor_speeds[i]
+		motor.speed = int(msg.linear.x * 1000)
 		publisher.publish(motor)
 
 def publisher():
