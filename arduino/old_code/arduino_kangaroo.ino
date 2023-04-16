@@ -11,12 +11,16 @@
 // Arduino 5V          goes to Kangaroo 5V (OPTIONAL, if you want Kangaroo to power the Arduino)
 
 // Independent mode channels on Kangaroo are, by default, '1' and '2'.
-KangarooSerial  K(Serial1);
+#define TX_PIN 18
+#define RX_PIN 19
+
+SoftwareSerial  SerialPort(RX_PIN, TX_PIN);
+KangarooSerial  K(SerialPort);
 KangarooChannel K1(K, '1', 128);
-KangarooChannel K2(K, '2', 128);
+KangarooChannel K2(K, '2', 129);
 
 void setup() {
-	Serial1.begin(9600);
+	SerialPort.begin(9600);
 	
 	K1.start();
 	K1.home().wait();
