@@ -43,9 +43,6 @@ void loop() {
 }
 
 void messageCb(const std_msgs::Int32MultiArray& msg) {
-	// nh.loginfo(("Motor: " + String(msg.address) + ", Speed: " + String(msg.speed)).c_str());
-	// nh.loginfo(("Addr: " + String(msg.address)).c_str());
-	// nh.loginfo(("Speed: " + String(msg.speed)).c_str());
 	for (int i = 0; i < 6; i++) {
 		motor_speeds[i] = msg.data[i];
 	}

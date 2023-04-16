@@ -13,6 +13,9 @@ def callback(msg: Twist, publisher: rospy.Publisher):
 	speeds.data = motor_speeds
 	publisher.publish(speeds)
 
+def turning():
+	pass
+
 def publisher():
 	rospy.init_node('publisher', anonymous=True, log_level=rospy.DEBUG)
 
