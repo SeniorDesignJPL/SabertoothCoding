@@ -19,7 +19,7 @@ def turning():
 def publisher():
 	rospy.init_node('publisher', anonymous=True, log_level=rospy.DEBUG)
 
-	pub = rospy.Publisher('arduino/motors', Int32MultiArray, queue_size=100)
+	pub = rospy.Publisher('arduino/wheels', Int32MultiArray, queue_size=100)
 	rospy.Subscriber('cmd_vel', Twist, callback, callback_args=pub)
 
 	rospy.spin()
