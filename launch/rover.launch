@@ -1,5 +1,6 @@
 <launch>
-    <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"/>
-    <node name="arduino" pkg="rosserial_python" type="serial_node.py" args="/dev/ttyUSB0" output="screen"/>
-    <node name="robot" pkg="motor_controller" type="arduino_comm.py"/>
+    <!-- <node name="keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"/> -->
+    <node name="arduino" pkg="rosserial_python" type="serial_node.py" args="/dev/ttyUSB0"/>
+    <node name="robot" pkg="motor_controller" type="arduino_comm.py" output="screen"/>
+    <node name="keyboard" pkg="motor_controller" type="get_key.py" />
 </launch>
